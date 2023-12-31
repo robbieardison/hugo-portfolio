@@ -1,9 +1,13 @@
 ---
-title: "How To use Jupyter Notebook As Hugo Blog Post"
+title: "Netflix Stock Data"
+author: "Robby"
 date: 2020-04-10
-tags: ["data science", "machine learning", "hugo"]
+tags: ["data science", "visualization"]
 draft: false
+categories:
+  - Analysis
 thumbnail: ./images/netflix_visualizations_files/netflix_visualizations_27_0.png
+toc: true
 ---
 
 # Introduction

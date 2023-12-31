@@ -1,6 +1,6 @@
 baseurl: "/"
 languageCode: "en-us"
-title: "Portfolio"
+title: "Webfolio"
 theme: "hugo-xmag"
 googleAnalytics: ""
 disqusShortname: ""
@@ -24,19 +24,24 @@ menu:
     - name: About
       url: about/
       weight: 2
+    - name: Contact
+      url: contact/
+      weight: 3
     - name: Categories
       url: categories/
-      weight: 3
+      weight: 4
     - name: Tags
       url: tags/
-      weight: 4
+      weight: 5
     - name: Subscribe
       url: index.xml
 
 params:
-  description: "A website built through Hugo and blogdown."
-  footer: "&copy; [Yihui Xie](https://yihui.org) 2017 - 2023 | [Github](https://github.com/yihui) | [Twitter](https://twitter.com/xieyihui)"
-  github_edit: "https://github.com/yihui/hugo-xmag/edit/master/exampleSite/content/"
+  description: "A personal blog and portfolio page"
+  #banner:
+  #  src: "/images/banner-analyst.png"
+  #  alt: "Banner"
+  footer: "&copy; [Robby Ardison](https://yihui.org) 2024 | [LinkedIn](https://www.linkedin.com/in/robby-ardison-003b63237/) | [Github](https://github.com/robbieardison)"
   summary_length: 300
   text:
     back: "&larr; Back to Home"
