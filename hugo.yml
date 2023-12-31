@@ -10,6 +10,8 @@ footnotereturnlinkcontents: "↩"
 hasCJKLanguage: true
 enableEmoji: true
 paginate: 6
+static:
+  sourceDir: "static"
 
 permalinks:
   post: "/post/:year/:month/:day/:slug/"
