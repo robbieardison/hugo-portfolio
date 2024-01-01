@@ -2,7 +2,7 @@
 title: "Netflix Stock Data"
 author: "Robby"
 date: 2020-04-10
-tags: ["data science", "visualization"]
+tags: [ "exploratory data analysis"]
 draft: false
 categories:
   - Analysis
