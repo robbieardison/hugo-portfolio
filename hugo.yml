@@ -1,6 +1,6 @@
 baseurl: "/"
 languageCode: "en-us"
-title: "Webfolio"
+title: "Robby Ardison's Webfolio"
 theme: "hugo-xmag"
 googleAnalytics: ""
 disqusShortname: ""
@@ -27,14 +27,12 @@ menu:
     - name: Contact
       url: contact/
       weight: 3
-    - name: Categories
-      url: categories/
-      weight: 4
+#    - name: Categories
+ #     url: categories/
+  #    weight: 4
     - name: Tags
       url: tags/
-      weight: 5
-    - name: Subscribe
-      url: index.xml
+      weight: 4
 
 params:
   description: "A personal blog and portfolio page"

@@ -1,11 +1,10 @@
 ---
 title: "Netflix Stock Data"
-author: "Robby"
-date: 2020-04-10
-tags: [ "exploratory data analysis"]
+date: 2021-11-23
+tags: ["exploratory data analysis"]
 draft: false
 categories:
-  - Analysis
+  - Analysis & Insights
 thumbnail: ./images/netflix_visualizations_files/netflix_visualizations_27_0.png
 toc: true
 ---

@@ -1,14 +1,19 @@
 ---
-title: '2011-2020 Indonesia's Earthquake'
+title: "Indonesia's Earthquake Analysis"
 date: 2024-01-01T12:43:55+07:00
 tags: ["descriptive statistics", "exploratory data analysis", "spatial snalysis", "cluster analysis"]
 draft: false
 categories:
-  - Analysis
-thumbnail: ./images/indonesia_earthquake_eda_files/indonesia_earthquake_eda_83_0.png
+  - Analysis & Insights
+thumbnail: ./images/indonesia_earthquake_eda_files/indonesia_earthquake_eda_53_0.png
 toc: true
 ---
 
+# Introduction
+
+This analysis delves into a comprehensive exploration of earthquake data spanning the years 2011 to 2020. Through descriptive statistics, spatial and temporal analyses, and clustering techniques, we aim to uncover insights into the distribution, trends, and categorization of earthquakes in Indonesia. The findings provide valuable information for enhancing our understanding of earthquake occurrences, contributing to informed decision-making and strategic planning for seismic resilience in the region.
+
+```python
 import numpy as np # Array handler
 import pandas as pd # Data analysis
 import seaborn as sns  #Visualization
@@ -22,7 +27,6 @@ import scipy
 # Clustering
 from sklearn.cluster import KMeans # Clustering machine learning
 from sklearn.metrics import silhouette_score
-
 
 # Hide Warning
 import warnings
@@ -2851,7 +2855,7 @@ plt.show()
     
 
 
-## ANALYSIS AND INSIGHT
+## Analysis & Insights
 
 - Based on the data, from 2011 - 2020 in Indonesia, most of the earthquake happened in 2015 to 2019.
 - Based on the data, from 2011 - 2020 in Indonesia, most of the earthquake happened in quarter 2 to quarter 4.
@@ -2874,6 +2878,6 @@ plt.show()
 - Most of the earthquake phenomenon happened in area 0.
 - 2 Cluster summary already written above.
 
-## SUMMARY
+## Summary
 
 This is the analysis and insight of Indonesia earthquake phenomenon from 2011 to 2020 based on Earthquake Occurrence. In conclusion, the analysis provides a comprehensive overview of earthquake occurrences in Indonesia, revealing temporal, spatial, and categorical patterns. Understanding these patterns is crucial for earthquake preparedness and risk mitigation strategies in the region.
