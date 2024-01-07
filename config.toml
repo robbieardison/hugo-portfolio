@@ -13,10 +13,8 @@ enableEmoji: true
 paginate: 6
 static:
   sourceDir: "static"
-
 permalinks:
   post: "/post/:year/:month/:day/:slug/"
-
 menu:
   main:
     - name: Home
@@ -34,7 +32,6 @@ menu:
     - name: Tags
       url: tags/
       weight: 4
-
 params:
   description: "A personal blog and portfolio page"
   #banner:
@@ -46,7 +43,6 @@ params:
     back: "&larr; Back to Home"
     edit: "Edit this page &rarr;"
     truncated: "&hellip;"
-
 markup:
   highlight:
     codeFences: false
