@@ -1,62 +1,55 @@
 ---
-baseurl = "/"
-languageCode = "en-us"
-title = "Robby Ardison's Webfolio"
-theme = "hugo-xmag"
-googleAnalytics = ""
-disqusShortname = ""
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
-preserveTaxonomyNames = true
-footnotereturnlinkcontents = "↩"
-hasCJKLanguage = true
-enableEmoji = true
-paginate = 6
-[static]
-  sourceDir = "static"
+baseurl: "/"
+languageCode: "en-us"
+title: "Robby Ardison's Webfolio"
+theme: "hugo-xmag"
+googleAnalytics: ""
+disqusShortname: ""
+ignoreFiles: ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
+preserveTaxonomyNames: true
+footnotereturnlinkcontents: "↩"
+hasCJKLanguage: true
+enableEmoji: true
+paginate: 6
+static:
+  sourceDir: "static"
 
-[permalinks]
-  post = "/post/:year/:month/:day/:slug/"
+permalinks:
+  post: "/post/:year/:month/:day/:slug/"
 
-[[menu.main]]
-  name = "Home"
-  url = ""
-  weight = 1
+menu:
+  main:
+    - name: Home
+      url: ""
+      weight: 1
+    - name: About
+      url: about/
+      weight: 2
+    - name: Contact
+      url: contact/
+      weight: 3
+#    - name: Categories
+ #     url: categories/
+  #    weight: 4
+    - name: Tags
+      url: tags/
+      weight: 4
 
-[[menu.main]]
-  name = "About"
-  url = "about/"
-  weight = 2
+params:
+  description: "A personal blog and portfolio page"
+  #banner:
+  #  src: "/images/banner-analyst.png"
+  #  alt: "Banner"
+  footer: "&copy; [Robby Ardison](https://yihui.org) 2024 | [LinkedIn](https://www.linkedin.com/in/robby-ardison-003b63237/) | [Github](https://github.com/robbieardison)"
+  summary_length: 300
+  text:
+    back: "&larr; Back to Home"
+    edit: "Edit this page &rarr;"
+    truncated: "&hellip;"
 
-[[menu.main]]
-  name = "Contact"
-  url = "contact/"
-  weight = 3
-
-# Uncomment and modify as needed
-#[[menu.main]]
-#  name = "Categories"
-#  url = "categories/"
-#  weight = 4
-
-[[menu.main]]
-  name = "Tags"
-  url = "tags/"
-  weight = 4
-
-[params]
-  description = "A personal blog and portfolio page"
-  #banner.src = "/images/banner-analyst.png"
-  #banner.alt = "Banner"
-  footer = "&copy; [Robby Ardison](https://yihui.org) 2024 | [LinkedIn](https://www.linkedin.com/in/robby-ardison-003b63237/) | [Github](https://github.com/robbieardison)"
-  summary_length = 300
-  [params.text]
-    back = "&larr; Back to Home"
-    edit = "Edit this page &rarr;"
-    truncated = "&hellip;"
-
-[markup]
-  [markup.highlight]
-    codeFences = false
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+markup:
+  highlight:
+    codeFences: false
+  goldmark:
+    renderer:
+      unsafe: true
