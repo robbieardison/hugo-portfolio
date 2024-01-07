@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Building a Simple ETL Pipeline with Apache Airflow: A Step-by-Step Guide | Robby Ardison&#39;s Webfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+
+  </head>
+
+  <body class="page">
+    <nav class="header">
+      <div class="banner">
+<a href="/" class="text">
+
+    
+Robby Ardison's Webfolio
+</a>
+</div>
+
+      <div class="head-meta">
+      
+        <span><a href="/">&larr; Back to Home</a></span>
+        <span class="date">2023-07-01</span>
+        
+        
+        
+          
+        
+        
+        
+        
+      
+      </div>
+    </nav>
+
+<div class="container">
+<article>
+<div class="article-meta">
+
+  <div class="categories">
+  
+    <a href="/categories/data-engineering">Data Engineering</a>
+  
+  </div>
+
+  <h1><span class="title">Building a Simple ETL Pipeline with Apache Airflow: A Step-by-Step Guide</span></h1>
+
+  
+
+  
+  <p>Tags: <a href="/tags/airflow">airflow</a>; <a href="/tags/etl">etl</a>
+  </p>
+  
+  
+
+</div>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#title-building-a-simple-etl-pipeline-with-apache-airflow-a-step-by-step-guide">Title: Building a Simple ETL Pipeline with Apache Airflow: A Step-by-Step Guide</a>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#step-1-setting-up-your-dag-directed-acyclic-graph">Step 1: Setting up your DAG (Directed Acyclic Graph)</a></li>
+        <li><a href="#step-2-define-your-etl-functions">Step 2: Define your ETL functions</a></li>
+        <li><a href="#step-3-create-task-instances">Step 3: Create task instances</a></li>
+        <li><a href="#step-4-define-the-task-dependencies">Step 4: Define the task dependencies</a></li>
+        <li><a href="#step-5-run-your-etl-pipeline">Step 5: Run your ETL pipeline</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+<main>
+<h2 id="title-building-a-simple-etl-pipeline-with-apache-airflow-a-step-by-step-guide">Title: Building a Simple ETL Pipeline with Apache Airflow: A Step-by-Step Guide</h2>
+<h3 id="introduction">Introduction</h3>
+<p>Apache Airflow is an open-source platform for orchestrating complex data workflows. In this blog post, I&rsquo;ll guide you through the process of building a simple ETL pipeline using Apache Airflow. Our example will focus on extracting data from a source, transforming it, and loading it into a destination.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Before you start, make sure you have Apache Airflow installed. You can install it using:</p>
+<pre><code class="language-bash">pip install apache-airflow
+</code></pre>
+<h3 id="step-1-setting-up-your-dag-directed-acyclic-graph">Step 1: Setting up your DAG (Directed Acyclic Graph)</h3>
+<p>In Airflow, workflows are defined as DAGs. Create a new Python file for your DAG, e.g., <code>etl_pipeline.py</code>. Define your DAG as follows:</p>
+<pre><code class="language-python">from datetime import datetime, timedelta
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
+
+# Define default_args and DAG
+default_args = {
+    'owner': 'your_name',
+    'start_date': datetime(2024, 1, 1),
+    'retries': 1,
+    'retry_delay': timedelta(minutes=5),
+}
+
+dag = DAG(
+    'etl_pipeline',
+    default_args=default_args,
+    schedule_interval=timedelta(days=1),
+)
+</code></pre>
+<h3 id="step-2-define-your-etl-functions">Step 2: Define your ETL functions</h3>
+<p>Now, define the functions for extracting, transforming, and loading data. For simplicity, let&rsquo;s use Python functions:</p>
+<pre><code class="language-python">def extract_data(**kwargs):
+    # Your code to extract data
+    pass
+
+def transform_data(**kwargs):
+    # Your code to transform data
+    pass
+
+def load_data(**kwargs):
+    # Your code to load data
+    pass
+</code></pre>
+<h3 id="step-3-create-task-instances">Step 3: Create task instances</h3>
+<p>Create task instances for each ETL step using <code>PythonOperator</code>:</p>
+<pre><code class="language-python">extract_task = PythonOperator(
+    task_id='extract_task',
+    python_callable=extract_data,
+    provide_context=True,
+    dag=dag,
+)
+
+transform_task = PythonOperator(
+    task_id='transform_task',
+    python_callable=transform_data,
+    provide_context=True,
+    dag=dag,
+)
+
+load_task = PythonOperator(
+    task_id='load_task',
+    python_callable=load_data,
+    provide_context=True,
+    dag=dag,
+)
+</code></pre>
+<h3 id="step-4-define-the-task-dependencies">Step 4: Define the task dependencies</h3>
+<p>Set up the dependencies between tasks:</p>
+<pre><code class="language-python">extract_task &gt;&gt; transform_task &gt;&gt; load_task
+</code></pre>
+<h3 id="step-5-run-your-etl-pipeline">Step 5: Run your ETL pipeline</h3>
+<p>Save your file and start the Airflow scheduler and web server:</p>
+<pre><code class="language-bash">airflow scheduler
+airflow webserver
+</code></pre>
+<p>Visit <code>http://localhost:8080</code> in your browser and trigger your DAG to see the ETL pipeline in action.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>Congratulations! You&rsquo;ve just created a simple ETL pipeline using Apache Airflow. This example provides a foundation for building more complex workflows to meet your specific data processing needs.</p>
+<p>Feel free to customize the example based on your data sources, transformations, and destinations. Explore Airflow&rsquo;s rich features to enhance and scale your ETL processes. Happy data orchestrating!</p>
+
+</main>
+
+
+
+
+
+<nav class="post-nav">
+  <span class="nav-prev"><a href="/posts/indonesia_earthquake_eda/">&larr; Indonesia&#39;s Earthquake Analysis</a></span>
+  <span class="nav-next"><a href="/posts/window_function/">Window Functions &rarr;</a></span>
+</nav>
+
+
+
+</article>
+</div>
+
+<script async src="//yihui.org/js/center-img.js"></script>
+
+<footer>
+
+<div class="footer">
+  <ul class="menu">
+    
+    <li><a href="/"><span data-hover="Home">Home</span></a></li>
+    
+    <li><a href="/about/"><span data-hover="About">About</span></a></li>
+    
+    <li><a href="/contact/"><span data-hover="Contact">Contact</span></a></li>
+    
+    <li><a href="/tags/"><span data-hover="Tags">Tags</span></a></li>
+    
+  </ul>
+  
+  <div class="copyright">© <a href="https://yihui.org">Robby Ardison</a> 2024 | <a href="https://www.linkedin.com/in/robby-ardison-003b63237/">LinkedIn</a> | <a href="https://github.com/robbieardison">Github</a></div>
+  
+</div>
+</footer>
+
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</body>
+</html>
+

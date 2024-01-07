@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Pandas Cheat Sheet | Robby Ardison&#39;s Webfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+
+  </head>
+
+  <body class="page">
+    <nav class="header">
+      <div class="banner">
+<a href="/" class="text">
+
+    
+Robby Ardison's Webfolio
+</a>
+</div>
+
+      <div class="head-meta">
+      
+        <span><a href="/">&larr; Back to Home</a></span>
+        <span class="date">2022-08-01</span>
+        
+        
+        
+          
+        
+        
+        
+        
+      
+      </div>
+    </nav>
+
+<div class="container">
+<article>
+<div class="article-meta">
+
+  <div class="categories">
+  
+    <a href="/categories/python">Python</a>
+  
+  </div>
+
+  <h1><span class="title">Pandas Cheat Sheet</span></h1>
+
+  
+
+  
+  <p>Tags: <a href="/tags/pandas">pandas</a>; <a href="/tags/python">python</a>
+  </p>
+  
+  
+
+</div>
+
+
+<nav id="TableOfContents"></nav>
+
+
+<main>
+<h1 id="pandas-cheat-sheet-a-comprehensive-guide-to-data-manipulation-in-python">Pandas Cheat Sheet: A Comprehensive Guide to Data Manipulation in Python</h1>
+<p>Pandas, a powerful and versatile library in Python, is the go-to tool for data manipulation and analysis. Whether you&rsquo;re a beginner or an experienced data scientist, this cheat sheet provides a quick reference for common Pandas operations, along with explanations and example codes.</p>
+<p><img src="/images/pandas_cheat_sheet.png" alt="png"></p>
+<ol>
+<li>
+<p><strong>Importing Pandas:</strong></p>
+<ul>
+<li>Explanation: Pandas is typically imported with the alias <code>pd</code> for brevity.</li>
+<li>Example Code:
+<pre><code class="language-python">import pandas as pd
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Creating DataFrames:</strong></p>
+<ul>
+<li>Explanation: DataFrames are the primary Pandas data structure, representing tabular data.</li>
+<li>Example Code:
+<pre><code class="language-python">data = {'Name': ['Eric', 'Robby', 'Tina'],
+        'Age': [25, 30, 35],
+        'City': ['Jakarta', 'Makassar', 'Banjarmasin']}
+df = pd.DataFrame(data)
+</code></pre>
+</li>
+<li>Output:
+<pre><code>   Name  Age           City
+0  Eric   25       Jakarta
+1    Robby   30  Makassar
+2 Tina   35    Banjarmasin
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Reading Data:</strong></p>
+<ul>
+<li>
+<p>Explanation: Pandas supports various file formats, such as CSV, Excel, and SQL databases.</p>
+</li>
+<li>
+<p>Example Code:</p>
+<pre><code class="language-python"># Reading from CSV
+df_csv = pd.read_csv('data.csv')
+
+# Reading from Excel
+df_excel = pd.read_excel('data.xlsx')
+
+# Reading from SQL
+df_sql = pd.read_sql('SELECT * FROM table', connection)
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Exploring Data:</strong></p>
+<ul>
+<li>Explanation: Quickly inspect the structure and summary statistics of your data.</li>
+<li>Example Code:
+<pre><code class="language-python"># Display the first few rows
+print(df.head())
+</code></pre>
+</li>
+<li>Output:
+<pre><code>   Name  Age           City
+0  Eric   25       Jakarta
+1    Robby   30  Makassar
+2 Tina   35    Banjarmasin
+</code></pre>
+<pre><code class="language-python"># Descriptive statistics
+print(df.describe())
+</code></pre>
+<ul>
+<li>Output:
+<pre><code>           Age
+count   3.000000
+mean   30.000000
+std     5.773503
+min    25.000000
+25%    27.500000
+50%    30.000000
+75%    32.500000
+max    35.000000
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-python"># Data types and missing values
+print(df.info())
+</code></pre>
+<ul>
+<li>Output:
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 3 entries, 0 to 2
+Data columns (total 3 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   Name    3 non-null      object
+ 1   Age     3 non-null      int64
+ 2   City    3 non-null      object
+dtypes: int64(1), object(2)
+memory usage: 200.0+ bytes
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Indexing and Selecting Data:</strong></p>
+<ul>
+<li>Explanation: Access specific rows or columns using labels or numerical indices.</li>
+<li>Example Code:
+<pre><code class="language-python"># Selecting columns by name
+age_column = df['Age']
+</code></pre>
+</li>
+<li>Output:
+<pre><code>0    25
+1    30
+2    35
+Name: Age, dtype: int64
+</code></pre>
+<pre><code class="language-python"># Selecting rows by index
+row_1 = df.loc[1]
+</code></pre>
+<ul>
+<li>Output:
+<pre><code>Name              Robby
+Age                30
+City    Makassar
+Name: 1, dtype: object
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-python"># Filtering data
+young_people = df[df['Age'] &lt; 30]
+</code></pre>
+<ul>
+<li>Output:</li>
+</ul>
+</li>
+</ul>
+<pre><code>    Name  Age           City
+ 0  Eric   25       Jakarta
+ 1    Robby   30  Makassar
+</code></pre>
+</li>
+<li>
+<p><strong>Handling Missing Data:</strong></p>
+<ul>
+<li>Explanation: Pandas provides tools for detecting and handling missing values.</li>
+<li>Example Code:
+<pre><code class="language-python"># Checking for missing values
+print(df.isnull())
+</code></pre>
+<ul>
+<li>Output:
+<pre><code> Name    Age   City
+0  False  False  False
+1  False  False  False
+2  False  False  False
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-python"># Dropping missing values
+df_clean = df.dropna()
+</code></pre>
+<ul>
+<li>Output: (Same as the original DataFrame if no missing values)</li>
+</ul>
+<pre><code>   Name  Age           City
+0  Eric   25       Jakarta
+1    Robby   30  Makassar
+2 Tina   35    Banjarmasin
+</code></pre>
+<pre><code class="language-python"># Filling missing values
+df_filled = df.fillna(0)
+</code></pre>
+<ul>
+<li>Output: (Filled with 0 for missing values)</li>
+</ul>
+<pre><code>   Name  Age           City
+0  Eric   25       Jakarta
+1    Robby   30  Makassar
+2 Tina   35    Banjarmasin
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Grouping and Aggregating:</strong></p>
+<ul>
+<li>Explanation: Grouping data by one or more columns and calculating aggregate statistics.</li>
+<li>Example Code:
+<pre><code class="language-python"># Grouping by 'City' and calculating mean age
+city_stats = df.groupby('City')['Age'].mean()
+</code></pre>
+<ul>
+<li>Output:
+<pre><code>City
+Banjarmasin      35.0
+Jakarta         25.0
+Makassar    30.0
+Name: Age, dtype: float64
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Merging and Concatenating:</strong></p>
+<ul>
+<li>Explanation: Combining multiple DataFrames based on common columns or indices.</li>
+<li>Example Code:
+<pre><code class="language-python"># Concatenating vertically
+df_concat = pd.concat([df1, df2])
+</code></pre>
+<ul>
+<li>Output: (Combined DataFrame)</li>
+</ul>
+<pre><code>   Name  Age           City
+0  Eric   25       Jakarta
+1    Robby   30  Makassar
+2 Tina   35    Banjarmasin
+</code></pre>
+<pre><code class="language-python"># Merging based on a common column
+merged_df = pd.merge(df1, df2, on='common_column')
+</code></pre>
+<ul>
+<li>Output: (Merged DataFrame)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Applying Functions:</strong></p>
+<ul>
+<li>
+<p>Explanation: Applying custom functions to elements, rows, or columns.</p>
+</li>
+<li>
+<p>Example Code:</p>
+<pre><code class="language-python"># Applying a function to a column
+df['Doubled_Age'] = df['Age'].apply(lambda x: x * 2)
+</code></pre>
+<ul>
+<li>Output:
+<pre><code> Name  Age           City  Doubled_Age
+ 0 Eric 25 Jakarta 50
+ 1 Robby 30 Makassar 60
+ 2 Tina 35 Banjarmasin 70
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-python"> # Applying a function to each element
+   df.applymap(lambda x: x.upper() if isinstance(x, str) else x)
+</code></pre>
+</li>
+</ul>
+<pre><code> - Output: (Applied uppercase to string values)
+</code></pre>
+</li>
+</ol>
+<pre><code>Name Age City
+0 Eric 25 Jakarta
+1 Robby 30 Makassar
+2 Tina 35 Banjarmasin
+</code></pre>
+<ol start="10">
+<li>
+<p><strong>Exporting Data:</strong></p>
+<ul>
+<li>
+<p>Explanation: Saving DataFrames to different file formats.</p>
+</li>
+<li>
+<p>Example Code:</p>
+<pre><code class="language-python"># Exporting to CSV
+df.to_csv('output.csv', index=False)
+
+# Exporting to Excel
+df.to_excel('output.xlsx', index=False)
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p>Pandas is a powerful library that streamlines data manipulation tasks, making it an essential tool in the toolkit of every data scientist and analyst. This cheat sheet serves as a quick reference for common Pandas operations, helping you navigate and manipulate your data efficiently. Whether you&rsquo;re cleaning, exploring, or analyzing data, Pandas has you covered. Happy coding!</p>
+
+</main>
+
+
+
+
+
+<nav class="post-nav">
+  <span class="nav-prev"><a href="/posts/window_function/">&larr; Window Functions</a></span>
+  <span class="nav-next"><a href="/posts/netflix_visualizations/">Netflix Stock Data &rarr;</a></span>
+</nav>
+
+
+
+</article>
+</div>
+
+<script async src="//yihui.org/js/center-img.js"></script>
+
+<footer>
+
+<div class="footer">
+  <ul class="menu">
+    
+    <li><a href="/"><span data-hover="Home">Home</span></a></li>
+    
+    <li><a href="/about/"><span data-hover="About">About</span></a></li>
+    
+    <li><a href="/contact/"><span data-hover="Contact">Contact</span></a></li>
+    
+    <li><a href="/tags/"><span data-hover="Tags">Tags</span></a></li>
+    
+  </ul>
+  
+  <div class="copyright">© <a href="https://yihui.org">Robby Ardison</a> 2024 | <a href="https://www.linkedin.com/in/robby-ardison-003b63237/">LinkedIn</a> | <a href="https://github.com/robbieardison">Github</a></div>
+  
+</div>
+</footer>
+
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</body>
+</html>
+

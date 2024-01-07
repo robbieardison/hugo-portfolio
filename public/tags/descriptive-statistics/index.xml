@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>descriptive statistics on Robby Ardison&#39;s Webfolio</title>
+    <link>/tags/descriptive-statistics/</link>
+    <description>Recent content in descriptive statistics on Robby Ardison&#39;s Webfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Jan 2024 12:43:55 +0700</lastBuildDate>
+    <atom:link href="/tags/descriptive-statistics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Indonesia&#39;s Earthquake Analysis</title>
+      <link>/posts/indonesia_earthquake_eda/</link>
+      <pubDate>Mon, 01 Jan 2024 12:43:55 +0700</pubDate>
+      <guid>/posts/indonesia_earthquake_eda/</guid>
+      <description>Introduction This analysis delves into a comprehensive exploration of earthquake data spanning the years 2011 to 2020. Through descriptive statistics, spatial and temporal analyses, and clustering techniques, we aim to uncover insights into the distribution, trends, and categorization of earthquakes in Indonesia. The findings provide valuable information for enhancing our understanding of earthquake occurrences, contributing to informed decision-making and strategic planning for seismic resilience in the region.&#xA;import numpy as np # Array handler import pandas as pd # Data analysis import seaborn as sns #Visualization import matplotlib.</description>
+    </item>
+  </channel>
+</rss>

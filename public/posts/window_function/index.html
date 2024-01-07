@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Window Functions | Robby Ardison&#39;s Webfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+
+  </head>
+
+  <body class="page">
+    <nav class="header">
+      <div class="banner">
+<a href="/" class="text">
+
+    
+Robby Ardison's Webfolio
+</a>
+</div>
+
+      <div class="head-meta">
+      
+        <span><a href="/">&larr; Back to Home</a></span>
+        <span class="date">2023-04-15</span>
+        
+        
+        
+          
+        
+        
+        
+        
+      
+      </div>
+    </nav>
+
+<div class="container">
+<article>
+<div class="article-meta">
+
+  <div class="categories">
+  
+    <a href="/categories/sql">SQL</a>
+  
+  </div>
+
+  <h1><span class="title">Window Functions</span></h1>
+
+  
+
+  
+  <p>Tags: <a href="/tags/sql">SQL</a>; <a href="/tags/rdbms">RDBMS</a>
+  </p>
+  
+  
+
+</div>
+
+
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#syntax">Syntax</a></li>
+    <li><a href="#sample-data">Sample Data</a></li>
+    <li><a href="#common-window-functions">Common Window Functions</a>
+      <ul>
+        <li><a href="#1-row_number">1. ROW_NUMBER()</a></li>
+        <li><a href="#2-sum">2. SUM()</a></li>
+        <li><a href="#3-avg">3. AVG()</a></li>
+        <li><a href="#4-lead-and-lag">4. LEAD() and LAG()</a></li>
+      </ul>
+    </li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+
+<main>
+<h1 id="window-functions-documentation">Window Functions Documentation</h1>
+<p>Window functions are a powerful feature in databases that allow you to perform calculations across a set of rows related to the current row. They are commonly used in SQL queries to analyze and aggregate data within a specific window or range.</p>
+<h2 id="syntax">Syntax</h2>
+<p>The basic syntax for using window functions is as follows:</p>
+<pre><code class="language-sql">SELECT
+  column1,
+  column2,
+  window_function(column3) OVER (PARTITION BY partition_column ORDER BY order_column ROWS BETWEEN N PRECEDING AND M FOLLOWING) AS result_column
+FROM
+  your_table;
+</code></pre>
+<ul>
+<li><strong>window_function</strong>: The specific window function to be applied (e.g., SUM, AVG, ROW_NUMBER, etc.).</li>
+<li><strong>column1, column2, &hellip;</strong>: The columns you want to include in the result set.</li>
+<li><strong>PARTITION BY partition_column</strong>: Optional clause that divides the result set into partitions to which the window function is applied independently. It is used to group rows based on one or more columns, and the window function is then applied separately to each partition.</li>
+<li><strong>ORDER BY order_column</strong>: Defines the order in which the rows are processed by the window function. It specifies how the data is sorted within each partition.</li>
+<li><strong>ROWS BETWEEN N PRECEDING AND M FOLLOWING</strong>: Specifies the window frame, indicating the range of rows used by the window function. It defines the relative position of the current row within the partition.</li>
+</ul>
+<h2 id="sample-data">Sample Data</h2>
+<p>Consider the following sample data for better illustration:</p>
+<p><strong>orders</strong> table:</p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>order_date</th>
+<th>order_amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2023-01-01</td>
+<td>100</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2023-02-01</td>
+<td>150</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-01-15</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-02-10</td>
+<td>120</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-window-functions">Common Window Functions</h2>
+<h3 id="1-row_number">1. ROW_NUMBER()</h3>
+<p>Assigns a unique integer to each row within a partition, based on the specified ordering.</p>
+<pre><code class="language-sql">SELECT
+  customer_id,
+  order_date,
+  order_amount,
+  ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) AS row_num
+FROM
+  orders;
+</code></pre>
+<p><strong>Result:</strong></p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>order_date</th>
+<th>order_amount</th>
+<th>row_num</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2023-01-01</td>
+<td>100</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2023-02-01</td>
+<td>150</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-01-15</td>
+<td>200</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-02-10</td>
+<td>120</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-sum">2. SUM()</h3>
+<p>Calculates the sum of a column within a specified window.</p>
+<pre><code class="language-sql">SELECT
+  customer_id,
+  order_date,
+  order_amount,
+  SUM(order_amount) OVER (PARTITION BY customer_id ORDER BY order_date) AS running_total
+FROM
+  orders;
+</code></pre>
+<p><strong>Result:</strong></p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>order_date</th>
+<th>order_amount</th>
+<th>running_total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2023-01-01</td>
+<td>100</td>
+<td>100</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2023-02-01</td>
+<td>150</td>
+<td>250</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-01-15</td>
+<td>200</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-02-10</td>
+<td>120</td>
+<td>320</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-avg">3. AVG()</h3>
+<p>Computes the average of a column over a specified window.</p>
+<pre><code class="language-sql">SELECT
+  customer_id,
+  order_date,
+  order_amount,
+  AVG(order_amount) OVER (PARTITION BY customer_id ORDER BY order_date) AS avg_amount
+FROM
+  orders;
+</code></pre>
+<p><strong>Result:</strong></p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>order_date</th>
+<th>order_amount</th>
+<th>avg_amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2023-01-01</td>
+<td>100</td>
+<td>100</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2023-02-01</td>
+<td>150</td>
+<td>125</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-01-15</td>
+<td>200</td>
+<td>200</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-02-10</td>
+<td>120</td>
+<td>160</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-lead-and-lag">4. LEAD() and LAG()</h3>
+<p>Accesses data from subsequent or preceding rows within the partition.</p>
+<pre><code class="language-sql">SELECT
+  customer_id,
+  order_date,
+  order_amount,
+  LEAD(order_amount) OVER (PARTITION BY customer_id ORDER BY order_date) AS next_order_amount,
+  LAG(order_amount) OVER (PARTITION BY customer_id ORDER BY order_date) AS prev_order_amount
+FROM
+  orders;
+</code></pre>
+<p><strong>Result:</strong></p>
+<table>
+<thead>
+<tr>
+<th>customer_id</th>
+<th>order_date</th>
+<th>order_amount</th>
+<th>next_order_amount</th>
+<th>prev_order_amount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2023-01-01</td>
+<td>100</td>
+<td>150</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2023-02-01</td>
+<td>150</td>
+<td>NULL</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-01-15</td>
+<td>200</td>
+<td>120</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-02-10</td>
+<td>120</td>
+<td>NULL</td>
+<td>200</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conclusion">Conclusion</h2>
+<p>Window functions are a versatile tool in SQL, providing a way to perform complex analyses over defined windows or partitions. They enhance the capabilities of queries, allowing for efficient and concise data manipulation and analysis. The <code>OVER</code> clause, along with <code>PARTITION BY</code> and <code>ORDER BY</code>, enables fine-grained control over the window within which the window function operates, making it a powerful tool for data analysis.</p>
+
+</main>
+
+
+
+
+
+<nav class="post-nav">
+  <span class="nav-prev"><a href="/posts/airflow_etl_explanation/">&larr; Building a Simple ETL Pipeline with Apache Airflow: A Step-by-Step Guide</a></span>
+  <span class="nav-next"><a href="/posts/pandas_cheat_sheet/">Pandas Cheat Sheet &rarr;</a></span>
+</nav>
+
+
+
+</article>
+</div>
+
+<script async src="//yihui.org/js/center-img.js"></script>
+
+<footer>
+
+<div class="footer">
+  <ul class="menu">
+    
+    <li><a href="/"><span data-hover="Home">Home</span></a></li>
+    
+    <li><a href="/about/"><span data-hover="About">About</span></a></li>
+    
+    <li><a href="/contact/"><span data-hover="Contact">Contact</span></a></li>
+    
+    <li><a href="/tags/"><span data-hover="Tags">Tags</span></a></li>
+    
+  </ul>
+  
+  <div class="copyright">© <a href="https://yihui.org">Robby Ardison</a> 2024 | <a href="https://www.linkedin.com/in/robby-ardison-003b63237/">LinkedIn</a> | <a href="https://github.com/robbieardison">Github</a></div>
+  
+</div>
+</footer>
+
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script>
+hljs.configure({languages: []});
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</body>
+</html>
+
