@@ -1,0 +1,3 @@
+[submodule "themes/hugo-xmag"]
+    path = themes/hugo-xmag
+    url = https://github.com/robbieardison/hugo-portfolio/tree/main/themes/hugo-xmag
